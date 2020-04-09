@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Colocviu1_245MainActivity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
         int result = intent.getIntExtra("Sum", 0);
-        Log.d("test", String.valueOf(result));
+        Toast.makeText(this, "The activity returned with result " + result, Toast.LENGTH_LONG).show();
     }
 
     @Override
