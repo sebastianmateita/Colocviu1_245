@@ -81,5 +81,35 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
         MyReceiver receiver = new MyReceiver();
 
         registerReceiver(receiver, filter);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("AllTerms")) {
+                allTerms.setText(savedInstanceState.getString("AllTerms"));
+            }
+            if (savedInstanceState.containsKey("NextTerm")) {
+                nextTerm.setText(savedInstanceState.getString("NextTerm"));
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("AllTerms", allTerms.getText().toString());
+        savedInstanceState.putString("NextTerm", nextTerm.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.containsKey("AllTerms")) {
+            allTerms.setText(savedInstanceState.getString("AllTerms"));
+        } else {
+            allTerms.setText("");
+        }
+        if (savedInstanceState.containsKey("NextTerm")) {
+            nextTerm.setText(savedInstanceState.getString("NextTerm"));
+        } else {
+            nextTerm.setText("");
+        }
     }
 }
