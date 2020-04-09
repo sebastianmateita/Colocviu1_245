@@ -3,6 +3,7 @@ package ro.pub.cs.systems.eim.Colocviu1_245;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,12 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
 
         int result = intent.getIntExtra("Sum", 0);
         Toast.makeText(this, "The activity returned with result " + result, Toast.LENGTH_LONG).show();
+
+        if (result > 10) {
+            Intent serviceIntent = new Intent(getApplicationContext(), Colocviu1_245Service.class);
+            serviceIntent.putExtra("Sum", result);
+            getApplicationContext().startService(serviceIntent);
+        }
     }
 
     @Override
@@ -69,5 +76,10 @@ public class Colocviu1_245MainActivity extends AppCompatActivity {
 
         computeButton = (Button)findViewById(R.id.compute_button);
         computeButton.setOnClickListener(buttonClickListener);
+
+        IntentFilter filter = new IntentFilter("com.example.Broadcast");
+        MyReceiver receiver = new MyReceiver();
+
+        registerReceiver(receiver, filter);
     }
 }
